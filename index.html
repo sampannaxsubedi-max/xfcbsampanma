@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Login</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{min-height:100vh;background:#0a0a0f;display:flex;align-items:center;justify-content:center;font-family:'Segoe UI',sans-serif;padding:20px;}
+.box{background:#111118;border:1px solid #222230;border-radius:16px;padding:40px 36px;width:100%;max-width:380px;}
+.top{text-align:center;margin-bottom:30px;}
+.icon{font-size:36px;margin-bottom:12px;}
+h1{font-size:22px;color:#fff;font-weight:700;margin-bottom:6px;}
+p{font-size:13px;color:#555570;}
+label{display:block;font-size:12px;color:#666680;margin-bottom:6px;margin-top:16px;font-weight:500;text-transform:uppercase;}
+input{width:100%;padding:12px 14px;background:#0a0a0f;border:1px solid #222230;border-radius:8px;color:#fff;font-size:14px;outline:none;}
+input:focus{border-color:#7c6fff;}
+input::placeholder{color:#333345;}
+.forgot{display:block;text-align:right;margin-top:8px;font-size:12px;color:#7c6fff;text-decoration:none;}
+.btn{margin-top:24px;width:100%;padding:13px;background:#7c6fff;color:white;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;}
+.or{text-align:center;color:#333345;font-size:12px;margin:20px 0;}
+.signup{text-align:center;margin-top:22px;font-size:13px;color:#555570;}
+.signup a{color:#7c6fff;text-decoration:none;font-weight:600;}
+</style>
+</head>
+<body>
+<div class="box">
+<div class="top">
+<div class="icon">🔐</div>
+<h1>Sign in</h1>
+<p>Welcome back!</p>
+</div>
+<label>Email</label>
+<input type="email" id="email" placeholder="you@example.com"/>
+<label>Password</label>
+<input type="password" id="password" placeholder="••••••••"/>
+<a href="#" class="forgot">Forgot password?</a>
+<button class="btn" onclick="login()">Sign in</button>
+<div class="or">── or ──</div>
+<div class="signup">No account? <a href="#">Create one</a></div>
+</div>
+<script>
+function login(){
+var e=document.getElementById('email').value;
+var p=document.getElementById('password').value;
+if(!e||!p){alert('Please fill all fields!');return;}
+alert('Login successful! 🎉');
+}
+</script>
+</body>
+</html>
