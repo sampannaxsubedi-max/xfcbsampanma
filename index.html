@@ -1,0 +1,501 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login · fully working</title>
+  <!-- Google Font & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(145deg, #f0f5fb 0%, #e1ebf4 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .login-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 2.5rem;
+      box-shadow: 0 30px 60px rgba(0, 20, 40, 0.12), 0 10px 30px rgba(0, 0, 0, 0.04);
+      padding: 2.5rem 2rem;
+      max-width: 420px;
+      width: 100%;
+      transition: transform 0.25s ease;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .login-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 40px 70px rgba(0, 20, 40, 0.15);
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 2.25rem;
+    }
+
+    .brand-icon {
+      background: linear-gradient(135deg, #2b7be4, #1a5bbf);
+      width: 68px;
+      height: 68px;
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      color: white;
+      font-size: 2rem;
+      box-shadow: 0 12px 20px -8px rgba(27, 85, 185, 0.3);
+    }
+
+    .login-header h1 {
+      font-size: 1.9rem;
+      font-weight: 600;
+      color: #0b1e33;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.3rem;
+    }
+
+    .login-header p {
+      color: #567394;
+      font-size: 0.95rem;
+      font-weight: 400;
+    }
+
+    .input-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #1f3b57;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.3px;
+    }
+
+    .input-field {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: white;
+      border-radius: 18px;
+      border: 1.5px solid #e2eaf2;
+      transition: border 0.2s, box-shadow 0.2s;
+      padding: 0 1rem;
+    }
+
+    .input-field:focus-within {
+      border-color: #2b7be4;
+      box-shadow: 0 0 0 4px rgba(43, 123, 228, 0.12);
+    }
+
+    .input-field i {
+      color: #889fbb;
+      font-size: 1.1rem;
+      margin-right: 0.75rem;
+      transition: color 0.2s;
+    }
+
+    .input-field:focus-within i {
+      color: #2b7be4;
+    }
+
+    .input-field input {
+      width: 100%;
+      padding: 0.9rem 0;
+      border: none;
+      background: transparent;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #0b1e33;
+      outline: none;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .input-field input::placeholder {
+      color: #b0c7dd;
+      font-weight: 400;
+      font-size: 0.95rem;
+    }
+
+    .toggle-password {
+      background: transparent;
+      border: none;
+      color: #889fbb;
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 0 0 0 0.5rem;
+      transition: color 0.2s;
+    }
+
+    .toggle-password:hover {
+      color: #2b7be4;
+    }
+
+    .login-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0.5rem 0 1.8rem;
+    }
+
+    .remember-me {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: #2f4a6a;
+      cursor: pointer;
+    }
+
+    .remember-me input[type="checkbox"] {
+      accent-color: #2b7be4;
+      width: 18px;
+      height: 18px;
+      border-radius: 6px;
+      border: 1.5px solid #c8d9e9;
+      cursor: pointer;
+    }
+
+    .forgot-link {
+      font-size: 0.9rem;
+      color: #2b7be4;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .forgot-link:hover {
+      color: #1a4f99;
+      text-decoration: underline;
+    }
+
+    .login-btn {
+      background: linear-gradient(135deg, #2b7be4, #1a5bbf);
+      border: none;
+      border-radius: 40px;
+      padding: 0.95rem;
+      width: 100%;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: white;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      box-shadow: 0 12px 24px -8px rgba(27, 85, 185, 0.25);
+      letter-spacing: 0.3px;
+      margin-top: 0.25rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .login-btn:hover {
+      transform: scale(1.02);
+      box-shadow: 0 16px 32px -8px rgba(27, 85, 185, 0.35);
+      background: linear-gradient(135deg, #3685f0, #1f62c7);
+    }
+
+    .login-btn:active {
+      transform: scale(0.97);
+    }
+
+    .signup-section {
+      text-align: center;
+      margin-top: 2rem;
+      color: #3f5d7c;
+      font-size: 0.95rem;
+    }
+
+    .signup-section a {
+      color: #2b7be4;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .signup-section a:hover {
+      color: #1a4f99;
+      text-decoration: underline;
+    }
+
+    /* demo message */
+    .demo-message {
+      margin-top: 1.8rem;
+      padding: 0.9rem 1rem;
+      background: rgba(43, 123, 228, 0.08);
+      border-radius: 18px;
+      font-size: 0.85rem;
+      color: #1f3b57;
+      text-align: center;
+      border: 1px dashed rgba(43, 123, 228, 0.25);
+      transition: all 0.2s;
+    }
+
+    .demo-message i {
+      color: #2b7be4;
+      margin-right: 6px;
+    }
+
+    .demo-message strong {
+      color: #0b1e33;
+      font-weight: 600;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #loginFeedback {
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-align: center;
+      min-height: 1.6rem;
+      color: #1a5bbf;
+    }
+
+    .error-feedback {
+      color: #d14545 !important;
+    }
+
+    .success-feedback {
+      color: #1f9d6a !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-card" role="main" aria-label="Login card">
+    <div class="login-header">
+      <div class="brand-icon"><i class="fas fa-lock"></i></div>
+      <h1>Welcome back</h1>
+      <p>Sign in to your account</p>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <form id="loginForm" autocomplete="on" novalidate>
+      <div class="input-group">
+        <label for="email"><i class="fas fa-envelope" style="margin-right: 6px;"></i> Email</label>
+        <div class="input-field">
+          <i class="fas fa-envelope"></i>
+          <input type="email" id="email" placeholder="hello@example.com" value="demo@example.com" required>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="password"><i class="fas fa-key" style="margin-right: 6px;"></i> Password</label>
+        <div class="input-field">
+          <i class="fas fa-key"></i>
+          <input type="password" id="password" placeholder="••••••••" value="demo123" required>
+          <button type="button" class="toggle-password" id="togglePasswordBtn" aria-label="Toggle password visibility">
+            <i class="fas fa-eye" id="toggleIcon"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="login-options">
+        <label class="remember-me">
+          <input type="checkbox" id="rememberCheck" checked> Remember me
+        </label>
+        <a href="#" class="forgot-link" id="forgotLink">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="login-btn" id="loginBtn">
+        <i class="fas fa-sign-in-alt"></i> Log In
+      </button>
+
+      <div id="loginFeedback"></div>
+    </form>
+
+    <!-- Sign up -->
+    <div class="signup-section">
+      Don’t have an account? <a href="#" id="signupLink">Sign up</a>
+    </div>
+
+    <!-- Demo hint / fully working -->
+    <div class="demo-message">
+      <i class="fas fa-check-circle"></i> <strong>Fully working</strong> · try <span style="background:#eef5ff; padding:0.1rem 0.6rem; border-radius:20px; font-weight:500;">demo@example.com</span> / <span style="background:#eef5ff; padding:0.1rem 0.6rem; border-radius:20px; font-weight:500;">demo123</span>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      "use strict";
+
+      // DOM refs
+      const loginForm = document.getElementById('loginForm');
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
+      const togglePasswordBtn = document.getElementById('togglePasswordBtn');
+      const toggleIcon = document.getElementById('toggleIcon');
+      const rememberCheck = document.getElementById('rememberCheck');
+      const loginFeedback = document.getElementById('loginFeedback');
+      const forgotLink = document.getElementById('forgotLink');
+      const signupLink = document.getElementById('signupLink');
+
+      // --- demo credentials ---
+      const DEMO_EMAIL = 'demo@example.com';
+      const DEMO_PASSWORD = 'demo123';
+
+      // --- toggle password visibility ---
+      togglePasswordBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        toggleIcon.className = type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
+      });
+
+      // --- show feedback helper ---
+      function setFeedback(message, isError = false, isSuccess = false) {
+        loginFeedback.textContent = message;
+        loginFeedback.classList.remove('error-feedback', 'success-feedback');
+        if (isError) loginFeedback.classList.add('error-feedback');
+        if (isSuccess) loginFeedback.classList.add('success-feedback');
+        if (!message) {
+          loginFeedback.classList.remove('error-feedback', 'success-feedback');
+        }
+      }
+
+      // --- validate email format (simple) ---
+      function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+
+      // --- handle login submit ---
+      loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Reset feedback
+        setFeedback('');
+
+        const email = emailInput.value.trim();
+        const password = passwordInput.value.trim();
+        const remember = rememberCheck.checked;
+
+        // 1. validation
+        if (!email || !password) {
+          setFeedback('Please fill in both email and password.', true);
+          return;
+        }
+
+        if (!isValidEmail(email)) {
+          setFeedback('Please enter a valid email address.', true);
+          return;
+        }
+
+        if (password.length < 4) {
+          setFeedback('Password must be at least 4 characters.', true);
+          return;
+        }
+
+        // 2. check credentials (demo)
+        if (email === DEMO_EMAIL && password === DEMO_PASSWORD) {
+          // success
+          setFeedback('✅ Login successful! Welcome back.', false, true);
+
+          // simulate "remember me" (just feedback)
+          if (remember) {
+            console.log('Remember me checked — (demo: would persist session)');
+          } else {
+            console.log('Remember me not checked.');
+          }
+
+          // optional: tiny ui feedback
+          const btn = document.getElementById('loginBtn');
+          btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Logging in...';
+          btn.disabled = true;
+          setTimeout(() => {
+            btn.innerHTML = '<i class="fas fa-check-circle"></i> Logged in';
+            btn.style.background = 'linear-gradient(135deg, #1f9d6a, #1a7a52)';
+            // reset after 3s (just for demo)
+            setTimeout(() => {
+              btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Log In';
+              btn.style.background = '';
+              btn.disabled = false;
+              setFeedback('');
+            }, 2500);
+          }, 800);
+
+        } else {
+          // wrong credentials
+          setFeedback('❌ Invalid email or password. Try demo@example.com / demo123', true);
+          // shake animation (simple)
+          loginForm.style.animation = 'shake 0.3s ease';
+          setTimeout(() => { loginForm.style.animation = ''; }, 400);
+        }
+      });
+
+      // --- inject keyframe shake (dynamic) ---
+      const styleShake = document.createElement('style');
+      styleShake.textContent = `
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          20% { transform: translateX(-8px); }
+          40% { transform: translateX(8px); }
+          60% { transform: translateX(-4px); }
+          80% { transform: translateX(4px); }
+        }
+      `;
+      document.head.appendChild(styleShake);
+
+      // --- "Forgot password" interactive demo ---
+      forgotLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        const email = emailInput.value.trim();
+        if (!email || !isValidEmail(email)) {
+          setFeedback('Please enter your email address to reset password.', true);
+          return;
+        }
+        setFeedback(`✉️ Password reset link sent to ${email} (demo)`, false, true);
+        setTimeout(() => {
+          setFeedback('');
+        }, 3500);
+      });
+
+      // --- "Sign up" interactive demo ---
+      signupLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        setFeedback('📝 Redirect to sign-up page (demo action)', false, true);
+        setTimeout(() => {
+          setFeedback('');
+        }, 2500);
+      });
+
+      // --- additional: real-time clear feedback on typing ---
+      emailInput.addEventListener('input', function() {
+        if (loginFeedback.textContent) setFeedback('');
+      });
+      passwordInput.addEventListener('input', function() {
+        if (loginFeedback.textContent) setFeedback('');
+      });
+
+      // --- prefill demo hint (already set in value) ---
+      // ensure the toggle icon matches initial type
+      // (password type, icon eye)
+      // already correct.
+
+      console.log('✅ Login page fully working (demo)');
+    })();
+  </script>
+</body>
+</html>
+```
